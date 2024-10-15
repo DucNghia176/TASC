@@ -16,8 +16,8 @@ public class DataTypeDemo {
         Integer obj1 = new Integer(5);
         Integer obj2 = new Integer(5);
         System.out.println("2. so sánh 2 object");
-        System.out.println("obj1 == obj2: " + (obj1==obj2));
-        System.out.println("obj1.equals(obj2): " + obj1.equals(obj2));
+        System.out.println("obj1 == obj2: " + (obj2 == obj2));
+        System.out.println("obj1.equals(obj2): " + obj2.equals(obj2));
 
         // 3. So sánh kiểu nguyên thủy với kiểu đối tượng
         Integer obj3 = 5;
