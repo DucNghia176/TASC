@@ -9,6 +9,7 @@ public class LinkedHashMapDemo {
         linkedHashMap.put(3, "C");
         linkedHashMap.put(1, "A");
         linkedHashMap.put(2, "B");
+        linkedHashMap.put(2, "C");
 
         System.out.println("LinkedHashMap:");
         for (Map.Entry<Integer, String> entry : linkedHashMap.entrySet()) {
