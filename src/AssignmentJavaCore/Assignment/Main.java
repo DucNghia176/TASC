@@ -31,22 +31,31 @@ public class Main {
     }
 
     private static void addCustomer() {
-        System.out.print("Nhập tên: ");
-        String name = scanner.nextLine().trim();
-        String email = inputValidEmail().trim();
-        String phoneNumber = inputValidPhoneNumber().trim();
+        while (true) {
+            System.out.print("Nhập tên: ");
+            String name = scanner.nextLine();
+            String email = inputValidEmail();
+            String phoneNumber = inputValidPhoneNumber();
 
-        Customer customer = new Customer(name, email, phoneNumber);
-        manager.addC(customer);
-        manager.saveC();
-        System.out.println("Thêm thành công");
+            Customer customer = new Customer(name, email, phoneNumber);
+            manager.addCustomer(customer);
+            System.out.println("Thêm thành công khách hàng!");
+
+            System.out.print("Bạn có muốn thêm khách hàng khác không? (y/n): ");
+            String choice = scanner.nextLine();
+            if (!choice.equalsIgnoreCase("y")) {
+                break;
+            }
+        }
+        manager.saveCustomers();
+        System.out.println("Đã lưu tất cả khách hàng.");
     }
 
     private static String inputValidPhoneNumber() {
         String phone;
         while (true) {
             System.out.print("Nhập số điện thoại (10 số): ");
-            phone = scanner.nextLine().trim();
+            phone = scanner.nextLine();
             if (phone.matches("^\\d{10}$")) {
                 if (!manager.phoneExists(phone)) {
                     break;
@@ -64,7 +73,7 @@ public class Main {
         String email;
         while (true) {
             System.out.print("Nhập email: ");
-            email = scanner.nextLine().trim();
+            email = scanner.nextLine();
             if (email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
                 break;
             } else {
@@ -76,7 +85,7 @@ public class Main {
 
     private static void findCustomer() {
         System.out.print("Nhập số điện thoại cần tìm: ");
-        String phone = scanner.nextLine().trim();
+        String phone = scanner.nextLine();
         Customer customer = manager.searchByPhone(phone);
         if (customer != null) {
             System.out.println("Khách hàng tìm thấy: " + customer);
@@ -87,19 +96,19 @@ public class Main {
 
     private static void updateCustomer() {
         System.out.print("Nhập số điện thoại cần sửa: ");
-        String phone = scanner.nextLine().trim();
+        String phone = scanner.nextLine();
         Customer customer = manager.searchByPhone(phone);
 
         if (customer != null) {
             System.out.print("Nhập tên mới (hoặc bỏ trống để giữ nguyên): ");
-            String newName = scanner.nextLine().trim();
+            String newName = scanner.nextLine();
             System.out.print("Nhập email mới (hoặc bỏ trống để giữ nguyên): ");
-            String newEmail = scanner.nextLine().trim();
+            String newEmail = scanner.nextLine();
             System.out.print("Nhập số điện thoại mới (hoặc bỏ trống để giữ nguyên): ");
-            String newPhone = scanner.nextLine().trim();
+            String newPhone = scanner.nextLine();
 
-            manager.edit(customer, newName.isEmpty() ? null : newName, newEmail.isEmpty() ? null : newEmail, newPhone.isEmpty() ? null : newPhone);
-            manager.saveC(); // Lưu lại vào file
+            manager.editCustomer(customer, newName.isEmpty() ? null : newName, newEmail.isEmpty() ? null : newEmail, newPhone.isEmpty() ? null : newPhone);
+            manager.saveCustomers(); //
             System.out.println("Cập nhật thông tin thành công!");
         } else {
             System.out.println("Không tìm thấy khách hàng.");
@@ -108,9 +117,9 @@ public class Main {
 
     private static void deleteCustomer() {
         System.out.print("Nhập số điện thoại cần xóa: ");
-        String phone = scanner.nextLine().trim();
-        if (manager.deleteC(phone)) {
-            manager.saveC(); // Cập nhật lại file sau khi xóa
+        String phone = scanner.nextLine();
+        if (manager.deleteCustomer(phone)) {
+            manager.saveCustomers();
             System.out.println("Xóa thành công khách hàng với số điện thoại: " + phone);
         } else {
             System.out.println("Không tìm thấy khách hàng với số điện thoại: " + phone);

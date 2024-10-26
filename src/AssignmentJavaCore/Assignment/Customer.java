@@ -5,9 +5,17 @@ public class Customer {
     private String email;
     private String phone;
 
-    public Customer(String phone, String email, String name) {
-        this.phone = phone;
+    public Customer(String name, String email, String phone) {
+        this.name = name;
         this.email = email;
+        this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -17,14 +25,6 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPhone() {
@@ -37,9 +37,10 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "name='" + name.trim() + '\'' +
-                ", email='" + email.trim() + '\'' +
-                ", phone='" + phone.trim() + '\'' +
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }
